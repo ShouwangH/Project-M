@@ -28,19 +28,19 @@ export const mainListItems = (
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Calender" />
+      <ListItemText primary="Tasks I've Created" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Tasks" />
+      <ListItemText primary="Tasks I've Assigned" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary="Integrations" />
+      <ListItemText primary="Tasks Assigned to Me" />
     </ListItemButton>
   </React.Fragment>
 );

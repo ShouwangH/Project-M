@@ -5,24 +5,28 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
+import MenuIcon from '@mui/icons-material/Menu'
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
-import { Button, ButtonGroup } from '@mui/material';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { mainListItems, secondaryListItems } from '../components/listItems';
+import { mainListItems, secondaryListItems } from '../components/Sidebar';
+import { useState } from 'react'
+import AddProject from './AddProject';
+import CreateTask from './CreateTask';
+import CssBaseline from '@mui/material/CssBaseline';
 
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Add Project', 'Add Task'];
 const settings = ['Profile', 'Dashboard', 'Logout'];
 
+
 const drawerWidth = 240;
+
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -69,17 +73,31 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const Header = () => {
-  const [open, setOpen] = React.useState(true);
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const [open, setOpen] = useState(true);
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -92,9 +110,10 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
+
   return (
     <>
-      <AppBar position="absolute" open={open}position="absolute" open={open}>
+      <AppBar position="absolute" open={open}>
 
         <Toolbar sx={{
           pr: '24px', // keep right padding when drawer closed
@@ -121,18 +140,9 @@ const Header = () => {
             LOGO
           </Typography>
 
-
-
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+            <AddProject />
+            <CreateTask />
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -166,6 +176,9 @@ const Header = () => {
           </Box>
         </Toolbar>
       </AppBar>
+
+              
+
       <Drawer variant="permanent" open={open}>
         <Toolbar
           sx={{
@@ -186,6 +199,8 @@ const Header = () => {
           {secondaryListItems}
         </List>
       </Drawer>
+      
+      
     </>
   );
 };

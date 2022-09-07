@@ -11,21 +11,38 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from '../components/Copyright';
-
+import {getFirestore, addDoc, updateDoc, collection} from 'firebase/firestore'
+import {Navigate} from 'react-router-dom'
 
 const theme = createTheme();
 
 export default function Register() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+
+  var redirect = null
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (e.target.password.Value == e.target.confirmpassword.Value) {
+    const db = getFirestore()
+    const docref = await addDoc(collection(db,"users"), 
+            {firstName:e.target.inputFirst.value, 
+            lastName:e.target.inputLast.value, 
+            email:e.target.inputEmail.value,
+            password:e.target.inputPassword.value,
+            confirmpassword:e.target.confirmPassword.value
+    })
+
+        await updateDoc(docref, {
+            userId:docref.id 
+    })
+        redirect = "True"
+
+      
+    }}
 
   return (
+    redirect ? <Navigate to="/login"/>:
+    <>
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
@@ -60,6 +77,26 @@ export default function Register() {
               Sign in
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="firstName"
+                label="First Name"
+                name="firstName"
+                placeholder ="First Name"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                placeholder="Last Name"
+                autoFocus
+              />
               <TextField
                 margin="normal"
                 required
@@ -67,7 +104,7 @@ export default function Register() {
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
+                placeholder="email"
                 autoFocus
               />
               <TextField
@@ -78,7 +115,7 @@ export default function Register() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                placeholder="Enter in a password"
               />
               <TextField
                 margin="normal"
@@ -88,7 +125,7 @@ export default function Register() {
                 label="Confirm Password"
                 type="confirmpassword"
                 id="confirmpassword"
-                autoComplete="current-password"
+                placeholder="Confirm your password"
               />
 
               <Button
@@ -112,5 +149,6 @@ export default function Register() {
         </Grid>
       </Grid>
     </ThemeProvider>
+    </>
   );
 }
