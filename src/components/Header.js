@@ -110,6 +110,7 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
+  const [pinnedProjects, setPinnedProjects] = useState([])
 
   return (
     <>

@@ -36,7 +36,7 @@ export default function TaskList(props) {
   useEffect( () => gettesttasks(),[] )
 
   const gettesttasks = () => {
-    const testTask= {name: "Test Task",
+    const testTask= {name: "Test Task with date picker",
     completed: false,
     createdby: "testcreator",
     id: "testid",
@@ -112,7 +112,7 @@ export default function TaskList(props) {
     <>
     <h3>{displayTitle()}</h3>
     <div className="task-list">
-          <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+          <List dense sx={{ width: '100%', maxWidth: 1080, bgcolor: 'background.paper' }}>
             {displayTasks(tasks)}
             <Taskform addTask={addTask} />
           </List>

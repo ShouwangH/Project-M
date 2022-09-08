@@ -4,10 +4,11 @@ import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SignInSide from './Views/Login';
+import Login from './Views/Login';
 import Register from './Views/Register';
 import {useState, useEffect} from 'react'
 import Home from './Views/Home';
+import ProjectView from './components/ProjectView';
 
 function App() {
 
@@ -52,14 +53,11 @@ function App() {
     <Header/>
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
     <DrawerHeader/>
-    <Router>
     <Routes>
-      <Route path="/" element={<Home currentUser={currentUser} logOut={logOut}/>}>
-        <Route path="/login" element={<SignInSide login={login}/>} />
+        <Route path="/" element={<Home currentUser={currentUser} logOut={logOut}/>}/>
+        <Route path="/login" element={<Login login={login}/>} />
         <Route path="/register" element={<Register />} />
-      </Route>
     </Routes>
-  </Router>
   </Box>
   </Box>
   </>
