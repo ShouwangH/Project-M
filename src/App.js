@@ -8,7 +8,9 @@ import Login from './Views/Login';
 import Register from './Views/Register';
 import {useState, useEffect} from 'react'
 import Home from './Views/Home';
-import ProjectView from './components/ProjectView';
+import ProjectView from './Views/ProjectView';
+import TaskCreateList from './Views/TaskCreateList';
+import TaskAssignList from './Views/TaskAssignList';
 
 function App() {
 
@@ -57,6 +59,9 @@ function App() {
         <Route path="/" element={<Home currentUser={currentUser} logOut={logOut}/>}/>
         <Route path="/login" element={<Login login={login}/>} />
         <Route path="/register" element={<Register />} />
+        <Route path="/project" element = {<ProjectView/>}/>
+        <Route path="/taskcreated" element = {<TaskCreateList/>}/>
+        <Route path="/taskassigned" element = {<TaskAssignList/>}/>
     </Routes>
   </Box>
   </Box>

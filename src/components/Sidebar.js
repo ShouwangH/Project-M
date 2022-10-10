@@ -35,24 +35,48 @@ export const mainListItems = (
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
+      <Link to="/taskcreated">
       <ListItemText primary="Tasks I've Created" />
+      </Link>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
+      <Link to="/taskassigned">
       <ListItemText primary="Tasks I've Assigned" />
+      </Link>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
+      <Link to="/Project">
       <ListItemText primary="Tasks Assigned to Me" />
+      </Link>
     </ListItemButton>
   </>
 );
 
-export const secondaryListItems = (
+
+const displayPinnedItems = items => {
+  return items.map((pinnedProjects, index)=> 
+  <ListItemButton key={index}>
+      <ListItemIcon>
+        <AssignmentIcon />
+      </ListItemIcon>
+      <ListItemText primary={pinnedProjects} />
+    </ListItemButton>
+  )
+}
+
+
+
+
+
+export default function SecondaryListItems(props) {
+
+  return (
   <>
     <ListSubheader component="div" inset>
       Pinned Items
@@ -76,4 +100,5 @@ export const secondaryListItems = (
       <ListItemText primary="Year-end sale" />
     </ListItemButton>
   </>
-);
+  )
+};

@@ -1,13 +1,20 @@
 import {query, where, collection, getDocs, addDoc, getFirestore, updateDoc, serverTimestamp, onSnapshot} from 'firebase/firestore'
 import {useState, useEffect, useContext, useRef} from 'react';
-import Task from './Task';
-import Taskform from './Taskform';
+import Task from '../components/Task';
+import Taskform from '../components/Taskform';
 import { SelectedProjectContext,SelectedTaskContext } from '../context';
-import { List, Box, DrawerHeader, Typography } from '@mui/material';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Title from '../components/Title';
 
 
 
 export default function TaskList(props) {
+
+  
   const [assignees, setAssignees] = useState([])
   const [tasks, setTasks] = useState([])
 
@@ -110,13 +117,24 @@ export default function TaskList(props) {
 
   return (
     <>
-    <h3>{displayTitle()}</h3>
-    <div className="task-list">
-          <List dense sx={{ width: '100%', maxWidth: 1080, bgcolor: 'background.paper' }}>
-            {displayTasks(tasks)}
+    <Title>{displayTitle()}</Title>
+      <Table size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell>Task</TableCell>
+            <TableCell>Due Date</TableCell>
+            <TableCell>Assignee</TableCell>
+          </TableRow>
+        </TableHead>
+          <TableBody>{displayTasks(tasks)}</TableBody>
+          <TableRow>
+          <TableCell>
             <Taskform addTask={addTask} />
-          </List>
-    </div>
+            </TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+          </TableRow>
+          </Table>
     </>
   )
 }

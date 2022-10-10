@@ -14,11 +14,12 @@ import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { mainListItems, secondaryListItems } from '../components/Sidebar';
+import { mainListItems}  from '../components/Sidebar';
+import SecondaryListItems from '../components/Sidebar';
 import { useState } from 'react'
 import AddProject from './AddProject';
 import CreateTask from './CreateTask';
-import CssBaseline from '@mui/material/CssBaseline';
+import { Link } from 'react-router-dom';
 
 
 const pages = ['Add Project', 'Add Task'];
@@ -87,6 +88,8 @@ const Header = () => {
 
   const [open, setOpen] = useState(true);
 
+
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -138,7 +141,9 @@ const Header = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            <Link to="/">
+      LOGO
+      </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -147,6 +152,7 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+            Welcome, User 
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -180,7 +186,7 @@ const Header = () => {
 
               
 
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={open} >
         <Toolbar
           sx={{
             display: 'flex',
@@ -194,11 +200,14 @@ const Header = () => {
           </IconButton>
         </Toolbar>
         <Divider />
-        <List component="nav">
+        <List component="nav" >
           {mainListItems}
           <Divider sx={{ my: 1 }} />
-          {secondaryListItems}
+               add Project Here
+          <Divider sx={{ my: 1 }} />
+          <SecondaryListItems/>
         </List>
+
       </Drawer>
       
       

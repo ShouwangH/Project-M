@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { updateDoc, doc, getFirestore, getDoc } from 'firebase/firestore';
-import AssignTask from './AssignTask';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { TextField } from '@mui/material';
 import moment from 'moment';
-import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
+
 
 
 
@@ -86,34 +83,26 @@ export default function Task(props) {
   };
 
   return (
-    <List sx={{ width: '100%', maxWidth: 360 }}>
-      <ListItem
-        key={props.index}
-        secondaryAction={
-          <Checkbox
+    <>
+      <TableRow key={props.index}>
+        <TableCell>   <Checkbox
             edge="end"
             onChange={handleToggle(props.index)}
-            checked={checked.indexOf(props.index) !== -1}
+            checked={checked.indexOf(props.index) !== -1} /> {props.task.name}</TableCell>
+        <TableCell><LocalizationProvider dateAdapter={AdapterMoment}>
+          <DesktopDatePicker
+            label="Due Date"
+            value={date}
+            minDate={moment()}
+            onChange={(newValue) => {
+              setDate(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} />}
           />
-        }
-      >
-        <ListItemButton>
-          <ListItemAvatar>
-          </ListItemAvatar>
-          <ListItemText /*id={}*/ primary={props.task.name}/>
-          <LocalizationProvider dateAdapter={AdapterMoment}>
-            <DesktopDatePicker
-              label="Due Date"
-              value={date}
-              minDate={moment()}
-              onChange={(newValue) => {
-                setDate(newValue);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-        </ListItemButton>
-      </ListItem>
-    </List>
+        </LocalizationProvider></TableCell>
+        <TableCell>Assignees</TableCell>
+      </TableRow>
+      <Divider />
+    </>
   );
 };
