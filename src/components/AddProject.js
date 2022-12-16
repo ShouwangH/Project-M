@@ -56,7 +56,6 @@ export default function AddProject() {
       </Button>
 
       <Modal
-        hideBackdrop
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
